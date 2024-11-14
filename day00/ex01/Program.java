@@ -2,7 +2,7 @@ package day00.ex01;
 
 import java.util.Scanner;
 
-public class Main {
+public class Program {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
