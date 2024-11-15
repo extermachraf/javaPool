@@ -26,8 +26,6 @@
  * - The maximum number of weeks is 18.
  * - String concatenation inside loops is discouraged to avoid performance issues.
  * 
- * Author: [Your Name]
- * Date: [Date]
  */
 
 package day00.ex03;
