@@ -1,33 +1,21 @@
-/*
- * Program: A Little Bit of Statistics
- *
- * Description:
- * This program collects and visualizes students' test results over multiple weeks.
- * The program accepts input for each week, consisting of a week identifier and five test scores for that week.
- * It validates the input for correctness, ensuring that:
- * - The week number is in the correct order (1 to 18).
- * - The test scores are within the range of 1 to 9 and there are exactly five scores.
- *
- * The program calculates the minimum test score for each week and generates a textual graph showing the student's
- * progress over time. Each week’s graph is represented by the "Week X" label followed by a series of equal signs
- * corresponding to the minimum grade that week.
- *
- * Once the input "42" is entered, the program terminates and outputs the progress graph, which shows the minimum
- * grade achieved for each week in order. If the input is invalid at any point, the program outputs an error message
- * and terminates.
- *
- * Allowed Functions:
- * - Input/Output: System.out, System.err, Scanner(System.in)
- * - Types: Primitive types, String
- * - Methods: String::equals
- *
- * Constraints:
- * - The input for each week is guaranteed to be in the form "Week X" followed by five integers for test scores.
- * - The maximum number of weeks is 18.
- * - String concatenation inside loops is discouraged to avoid performance issues.
- * 
- */
 
+/**
+ * The Program class is designed to track weekly test scores and generate a 
+ * graphical representation of the minimum score for each week. The program 
+ * reads input from the user, validates the input, and builds a progress 
+ * report in the form of a graph.
+ * 
+ * The class contains the following methods:
+ * 
+ * - stringToInt(String[] grades): Converts an array of strings to an array of integers.
+ * - check_week(String week, int order): Validates the format and order of the week input.
+ * - check_tests(String tests): Validates the format and range of the test scores input.
+ * - build_statistics(int order, String tests): Builds a graphical representation of the minimum test score for a given week.
+ * 
+ * The main method runs an interactive loop, prompting the user for weekly data 
+ * and generating the progress report until the user inputs "42", which terminates 
+ * the program and prints the final report.
+ */
 package day00.ex03;
 
 import java.util.Scanner;

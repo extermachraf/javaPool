@@ -1,31 +1,18 @@
-/*
- * Program: Coffee Query Counter
- * Description:
- * This program continuously reads a sequence of natural numbers from the user. 
- * It calculates the sum of the digits for each number and checks whether the sum 
- * is a prime number. If the sum is a prime number, the program increments a counter.
- * The program stops when the number 42 is entered, at which point it outputs the 
- * total count of coffee-related queries (i.e., those with a prime sum of digits).
- *
- * A valid query must be a natural number greater than 1. If the sum of the digits 
- * of the number is a prime number, it is considered a coffee request. If an invalid 
- * number or non-numeric input is provided, the program will terminate with an error message.
- *
- * Input:
- * - Natural numbers (greater than 1), one per line.
- * Output:
- * - A count of coffee-related queries, displayed when the number 42 is entered.
- *
- * Example:
+
+/**
+ * The Program class provides functionality to check if the sum of digits of a given number is prime,
+ * and counts the number of such occurrences based on user input.
  * 
- * Input:
- * --> 198131
- * --> 12901212
- * --> 11122
- * --> 42
- *
- * Output:
- * Count of coffee-request : 2
+ * Methods:
+ * - isPrime(int number): Checks if a given number is prime.
+ * - sum_of_digits(int number): Calculates the sum of the digits of a given number.
+ * - main(String[] args): The main method that drives the program, taking user input and processing it.
+ * 
+ * The program continuously prompts the user for input and performs the following actions:
+ * - If the input is less than or equal to 1, it prints an error message and exits.
+ * - If the input is 42, it prints the count of coffee requests and exits.
+ * - If the sum of the digits of the input is a prime number, it increments the coffee request count.
+ * - If the input is not a valid integer, it prints an error message and exits.
  */
 package day00.ex02;
 

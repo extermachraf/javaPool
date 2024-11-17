@@ -1,3 +1,19 @@
+/**
+ * This program reads a line of input from the user and generates a histogram
+ * of the frequency of characters in the input. The histogram is displayed
+ * vertically with a maximum height of 10 rows. The characters are sorted
+ * first by frequency (in descending order) and then lexicographically.
+ * 
+ * The program performs the following steps:
+ * 1. Reads a line of input from the user.
+ * 2. Counts the frequency of each character in the input.
+ * 3. Stores and sorts the characters by frequency and lexicographically.
+ * 4. Scales the frequencies to fit within a height of 10.
+ * 5. Prints the frequency numbers above the histogram bars.
+ * 6. Prints the histogram vertically.
+ * 7. Prints the characters at the bottom of the histogram.
+ */
+
 package day00.ex04;
 
 import java.util.Scanner;
@@ -49,7 +65,7 @@ public class Program {
 
         // Print the frequency numbers above the histogram bars
         for (int i = 0; i < Math.min(uniqueCharCount, 10); i++) {
-            System.out.print(frequency[sortedChars[i]] + " ");
+            System.out.print(frequency[sortedChars[i]] + "  ");
         }
         System.out.println();
 
@@ -61,9 +77,9 @@ public class Program {
                 // Print the `#` if the scaled height is greater than or equal to the current
                 // row
                 if (scaledHeight >= row) {
-                    System.out.print("# ");
+                    System.out.print("#  ");
                 } else {
-                    System.out.print("  "); // Space for alignment
+                    System.out.print("   "); // Space for alignment
                 }
             }
             System.out.println(); // New line after each row
@@ -71,7 +87,7 @@ public class Program {
 
         // Print the characters at the bottom
         for (int i = 0; i < Math.min(uniqueCharCount, 10); i++) {
-            System.out.print((char) sortedChars[i] + " ");
+            System.out.print((char) sortedChars[i] + "  ");
         }
         System.out.println();
         scanner.close();
