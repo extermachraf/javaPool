@@ -29,6 +29,7 @@
  * 4. Enter attendance records in the format "<student name> <session hour> <day of the month> <attendance status>". Enter '.' to finish.
  * 5. The program will display the attendance records in a formatted table.
  */
+
 package day00.ex05;
 
 import java.util.Arrays;
