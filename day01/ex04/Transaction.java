@@ -45,4 +45,9 @@ public class Transaction {
     public void setNextTransaction(Transaction nextTransaction) {
         this.nextTransaction = nextTransaction;
     }
+
+    public String displayTransaction() {
+        return "Transaction ID: " + id + ", Sender: " + sender.getName() + ", Recipient: "
+                + recipient.getName() + ", Amount: " + amount + ", Type: " + type;
+    }
 }

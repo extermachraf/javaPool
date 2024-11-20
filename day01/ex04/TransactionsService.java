@@ -5,6 +5,10 @@ import java.util.UUID;
 public class TransactionsService {
     private UsersList usersList;
 
+    public UsersList getUserList() {
+        return usersList;
+    }
+
     public TransactionsService() {
         usersList = new UsersArrayList();
     }
@@ -13,7 +17,7 @@ public class TransactionsService {
         usersList.addUser(user);
     }
 
-    public int getUserBalance(int userId) throws UserNotFoundException {
+    public double getUserBalance(int userId) throws UserNotFoundException {
         User user = usersList.retrieveUserByID(userId);
         return user.getBalance();
     }

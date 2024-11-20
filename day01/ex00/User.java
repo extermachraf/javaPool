@@ -56,7 +56,7 @@ public class User {
         this.Name = name;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(double balance) throws IllegalArgumentException {
         if (balance < 0) {
             System.err.println("Balance can't be negative");
             System.exit(-1);
