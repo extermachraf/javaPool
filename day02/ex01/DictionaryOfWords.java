@@ -1,16 +1,16 @@
 package day02.ex01;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class Dictionary {
+public class DictionaryOfWords {
     List<String> file1;
     List<String> file2;
     List<String> Dictionary;
 
-    public Dictionary(List<String> file1, List<String> file2) {
+    public DictionaryOfWords(List<String> file1, List<String> file2) {
         this.file1 = file1;
         this.file2 = file2;
     }
@@ -26,4 +26,17 @@ public class Dictionary {
         for (String word : Dictionary)
             System.out.println(word);
     }
+
+    //geters
+    public List<String> getWords(boolean wichFile){
+        if (wichFile)
+            return this.file2;
+        else
+            return this.file1;
+    }
+
+    public List<String> getDictionary(){
+        return this.Dictionary;
+    }
+    
 }
