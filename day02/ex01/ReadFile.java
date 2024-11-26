@@ -1,7 +1,10 @@
 package day02.ex01;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -9,19 +12,31 @@ import java.util.ArrayList;
 public class ReadFile {
     static String content;
 
-    public static ReadFile read(String path) throws IOException {
+    public static ReadFile read(String path)
+            throws IOException, CustomException {
 
         StringBuilder buildeText = new StringBuilder();
+        boolean isFileEmpty = true;
+        File file = new File(path);
+        if (file.length() > 10 * 1024 * 1024)
+            throw new CustomException("File size exceeds 10 MB");
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line = reader.readLine();
             buildeText.append(line);
 
             while (line != null) {
-                line = reader.readLine();
-                if (line != null)
+                if (line != null && !line.trim().isEmpty()) {
+                    isFileEmpty = false;
                     buildeText.append(" ").append(line);
+                }
+                line = reader.readLine();
             }
+            if (isFileEmpty)
+                throw new CustomException("The File is Empty");
             ReadFile.content = buildeText.toString().toLowerCase();
+
+            if (content.split("[^a-zA-Z]+").length == 0)
+                throw new CustomException("the file contains no valid words");
         }
         return new ReadFile();
     }
@@ -45,5 +60,17 @@ public class ReadFile {
     }
 
     private ReadFile() {
+    }
+
+    public static void writeFile(List<String> dictionary) throws IOException {
+        File file = new File("dictionary.txt");
+        if (!file.exists())
+            file.createNewFile();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (String word : dictionary) {
+                writer.write(word);
+                writer.newLine(); // Write each word on a new line
+            }
+        }
     }
 }

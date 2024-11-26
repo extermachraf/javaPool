@@ -27,16 +27,16 @@ public class DictionaryOfWords {
             System.out.println(word);
     }
 
-    //geters
-    public List<String> getWords(boolean wichFile){
+    // geters
+    public List<String> getWords(boolean wichFile) {
         if (wichFile)
             return this.file2;
         else
             return this.file1;
     }
 
-    public List<String> getDictionary(){
+    public List<String> getDictionary() {
         return this.Dictionary;
     }
-    
+
 }

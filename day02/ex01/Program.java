@@ -2,8 +2,8 @@ package day02.ex01;
 
 import java.io.IOException;
 import java.util.List;
+
 public class Program {
-    // TODO handle empty files
     public static void main(String[] args) {
         try {
             List<String> wordOfFile1 = ReadFile.read("day02/ex01/files/file1.txt")
@@ -13,12 +13,15 @@ public class Program {
 
             DictionaryOfWords dic = new DictionaryOfWords(wordOfFile1, wordOfFile2);
             dic.fillDictionary();
-            dic.displayDictionary();
+            // dic.displayDictionary();
             Vectors vec = new Vectors(dic);
-            vec.displayVectors();
+            // vec.displayVectors();
+            ReadFile.writeFile(dic.getDictionary());
+            System.out.println("\u001B[32m" + "Similarity = " + vec.CosineSimilarity() + "\u001B[0m");
         } catch (IOException ex) {
-            System.err.println("\u001B[31m" + "an error occurred when trying to read content from the file\n"
-                    + ex.getMessage() + "\u001B[0m");
+            System.err.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
+        } catch (CustomException ex) {
+            System.err.println("\u001B[31m" + ex.getMessage() + "\u001B[0m");
         }
     }
 }
