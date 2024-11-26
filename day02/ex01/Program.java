@@ -4,11 +4,17 @@ import java.io.IOException;
 import java.util.List;
 
 public class Program {
+    static void parse_args(String[] args) throws CustomException {
+        if (args.length != 2)
+            throw new CustomException("Invalid number of arguments. Expected 2 arguments.");
+    }
+
     public static void main(String[] args) {
         try {
-            List<String> wordOfFile1 = ReadFile.read("day02/ex01/files/file1.txt")
+            parse_args(args);
+            List<String> wordOfFile1 = ReadFile.read(args[0])
                     .TransformContentToList();
-            List<String> wordOfFile2 = ReadFile.read("day02/ex01/files/file2.txt")
+            List<String> wordOfFile2 = ReadFile.read(args[1])
                     .TransformContentToList();
 
             DictionaryOfWords dic = new DictionaryOfWords(wordOfFile1, wordOfFile2);
