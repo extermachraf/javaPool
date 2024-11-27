@@ -38,7 +38,11 @@ public class Program {
                 System.out.print("--> ");
                 String line = reader.readLine();
                 // use a classe that handle the cmd line for the minishell
-                shell.handleCmds(line);
+                try {
+                    shell.handleCmds(line);
+                } catch (Exception e) {
+                    System.out.println("Permission denied");
+                }
             }
         } catch (CustomException ex) {
             System.err.println("\u001B[31mERROR : " + ex.getMessage() + "\u001B[0m");
