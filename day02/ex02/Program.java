@@ -35,7 +35,7 @@ public class Program {
             Shell shell = new Shell(pathToWorkDir);
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             while (true) {
-                System.out.print("--> ");
+                System.out.print("\u001B[33m--> \u001B[0m");
                 String line = reader.readLine();
                 // use a classe that handle the cmd line for the minishell
                 try {

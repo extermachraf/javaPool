@@ -17,7 +17,6 @@ public class Shell {
     public void handleCmds(String line) throws IOException {
         String[] splitline = line.trim().split(" ", 2);
         String cmd = splitline[0];
-
         switch (cmd) {
             case "cd":
                 if (splitline.length > 1) {
@@ -30,15 +29,16 @@ public class Shell {
                 listFiles(splitline);
                 break;
             case "mv":
-                System.out.println("mv the file");
+                moveOrRenameFile(splitline);
                 break;
             case "exit":
-                System.out.println("exit from shell");
+                System.exit(0);
                 break;
             default:
                 System.out.println("Unknown command: " + cmd);
                 break;
         }
+        System.out.println("\u001B[33m" + currentDirectory.getPath() + "\u001B[0m");
     }
 
     // implement the ls cmd
@@ -71,9 +71,6 @@ public class Shell {
         String canonicalRoot = rootDirectory.getCanonicalPath();
         String canonicalNextDir = nextDir.getCanonicalPath();
 
-        System.out.println("Root Directory: " + canonicalRoot);
-        System.out.println("Next Directory: " + canonicalNextDir);
-
         if (!canonicalNextDir.startsWith(canonicalRoot)) {
             throw new IOException();
         }
@@ -81,6 +78,38 @@ public class Shell {
             currentDirectory = nextDir;
         } else {
             System.err.println("cd: not a directory: " + splitline[1]);
+        }
+    }
+
+    // handle the mouve and rename methode
+    private void moveOrRenameFile(String[] splitline) throws IOException {
+        if (splitline[1].split(" ").length != 2) {
+            System.err.println("mv: missing file operand");
+            return;
+        }
+        File sourceFile = new File(currentDirectory, splitline[1].split(" ")[0]);
+        File destFile = new File(currentDirectory, splitline[1].split(" ")[1]);
+
+        if (!sourceFile.exists()) {
+            System.err.println("mv: cannot stat '" + splitline[1] + "': No such file or directory");
+            return;
+        }
+        if (destFile.exists() && destFile.isDirectory()) {
+            destFile = new File(destFile, sourceFile.getName());
+        }
+
+        String canonicalRoot = rootDirectory.getCanonicalPath();
+        String canonicalDest = destFile.getCanonicalPath();
+
+        if (!canonicalDest.startsWith(canonicalRoot)) {
+            System.err.println("mv: cannot move file outside the root directory");
+            return;
+        }
+
+        if (sourceFile.renameTo(destFile)) {
+            System.out.println("File moved/renamed successfully");
+        } else {
+            System.err.println("mv: failed to move/rename '" + splitline[1] + "'");
         }
     }
 }
