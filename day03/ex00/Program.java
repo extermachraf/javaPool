@@ -23,13 +23,25 @@ public class Program {
             System.out.println("count = " + count);
             Egg egg = new Egg(count);
             Hen hen = new Hen(count);
-            new Thread(egg).start();
-            new Thread(hen).start();
+            Thread eggs = new Thread(egg);
+            Thread hens = new Thread(hen);
+
+            eggs.start();
+            hens.start();
+
+            eggs.join();
+            hens.join();
+
+            for (int i = 0; i < count; i++) {
+                System.out.println("Human");
+            }
 
         } catch (CustomException ex) {
             System.err.println("\u001B[31mError : " + ex.getMessage() + "\u001B[0m");
         } catch (NumberFormatException ex) {
             System.err.println("\u001B[31mError: you provided a large number that can't be handled\u001B[0m");
+        } catch (InterruptedException ex) {
+            System.err.println("\u001B[31mError: an error occured\u001B[0m");
         }
     }
 }
