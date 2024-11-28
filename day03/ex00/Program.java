@@ -21,6 +21,11 @@ public class Program {
         try {
             int count = parseArgs(args);
             System.out.println("count = " + count);
+            Egg egg = new Egg(count);
+            Hen hen = new Hen(count);
+            new Thread(egg).start();
+            new Thread(hen).start();
+
         } catch (CustomException ex) {
             System.err.println("\u001B[31mError : " + ex.getMessage() + "\u001B[0m");
         } catch (NumberFormatException ex) {
