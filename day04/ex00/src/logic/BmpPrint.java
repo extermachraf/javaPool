@@ -1,5 +1,6 @@
 package ex00.src.logic;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,8 +34,35 @@ public class BmpPrint {
         this.black = black;
         this.white = white;
 
-        System.out.println("image is : " + this.image);
-        System.out.println("black is : " + this.black);
-        System.out.println("white is : " + this.white);
+        // System.out.println("image is : " + this.image);
+        // System.out.println("black is : " + this.black);
+        // System.out.println("white is : " + this.white);
+    }
+
+    public char[][] imageToString() throws CustomException {
+        char[][] image = new char[this.image.getHeight()][this.image.getWidth()];
+
+        for (int yPixel = 0; yPixel < this.image.getHeight(); yPixel++) {
+            for (int xPixel = 0; xPixel < this.image.getWidth(); xPixel++) {
+                int color = this.image.getRGB(xPixel, yPixel);
+                if (color == Color.BLACK.getRGB()) {
+                    image[yPixel][xPixel] = black;
+                } else if (color == Color.WHITE.getRGB()) {
+                    image[yPixel][xPixel] = white;
+                } else {
+                    throw new CustomException("The image must contain only black and white pixels");
+                }
+            }
+        }
+        return image;
+    }
+
+    public void displayImage(char[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print("\u001B[32m" + arr[i][j] + "\u001B[0m");
+            }
+            System.out.println();
+        }
     }
 }

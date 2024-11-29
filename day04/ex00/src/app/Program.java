@@ -48,6 +48,8 @@ public class Program {
 
             BmpPrint bmp = new BmpPrint(black, white, image);
 
+            bmp.displayImage(bmp.imageToString());
+
         } catch (CustomException ex) {
             System.err.println("\u001B[31mERROR: " + ex.getMessage() + "\u001B[0m");
         } catch (IOException ex) {
