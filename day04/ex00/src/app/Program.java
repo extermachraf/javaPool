@@ -1,5 +1,6 @@
 package ex00.src.app;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -34,8 +35,6 @@ public class Program {
         if (!imagePath.isAbsolute())
             throw new CustomException("you need to provide the absolute path of image");
         return imagePath.toString();
-        // Additional code to check the image size and colors will be added in the main
-        // method
     }
 
     public static void main(String[] args) {
@@ -47,12 +46,12 @@ public class Program {
             char white = parseColore(args[1], EXPECTED_WHITE);
             String image = parseImage(args[2], EXPECTED_IMAGE);
 
-            System.out.println("Black character: " + black);
-            System.out.println("White character: " + white);
-            System.out.println("Image path: " + image);
+            BmpPrint bmp = new BmpPrint(black, white, image);
 
         } catch (CustomException ex) {
-            System.err.println("ERROR: " + ex.getMessage());
+            System.err.println("\u001B[31mERROR: " + ex.getMessage() + "\u001B[0m");
+        } catch (IOException ex) {
+            System.err.println("\u001B[31mERROR: " + ex.getMessage() + "\u001B[0m");
         }
     }
 }

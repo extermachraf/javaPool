@@ -4,7 +4,7 @@ TARGET_DIR = target
 BIN_DIR = $(TARGET_DIR)/ex00/src
 
 # Java source files
-SRC_FILES = $(SRC_DIR)/app/Program.java $(SRC_DIR)/logic/Print.java $(SRC_DIR)/logic/CustomException.java
+SRC_FILES = $(SRC_DIR)/app/Program.java $(SRC_DIR)/logic/BmpPrint.java $(SRC_DIR)/logic/CustomException.java
 
 # Define the classpath
 CLASSPATH = $(TARGET_DIR)
