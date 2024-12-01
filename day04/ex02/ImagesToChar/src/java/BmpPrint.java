@@ -1,20 +1,21 @@
 package ex02.ImagesToChar.src.java;
 
+import com.diogonunes.jcdp.color.api.Ansi;
+import com.diogonunes.jcdp.color.ColoredPrinter;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.FileInputStream;
 
 import javax.imageio.ImageIO;
 
 public class BmpPrint {
-    private char black;
-    private char white;
+    private Ansi.BColor background1;
+    private Ansi.BColor background2;
     BufferedImage image;
 
-    public BmpPrint(char black, char white) throws IOException, CustomException {
+    public BmpPrint(Ansi.BColor background1, Ansi.BColor background2) throws IOException, CustomException {
         // Load image from JAR as a resource
         InputStream imageStream = getClass().getResourceAsStream("/resources/it.bmp");
         if (imageStream == null) {
@@ -29,13 +30,10 @@ public class BmpPrint {
         if (BMP.getWidth() != 16 || BMP.getHeight() != 16) {
             throw new CustomException("The image is not in the format of 16x16 pixels.");
         }
-        this.image = BMP;
-        this.black = black;
-        this.white = white;
 
-        // System.out.println("image is : " + this.image);
-        // System.out.println("black is : " + this.black);
-        // System.out.println("white is : " + this.white);
+        this.image = BMP;
+        this.background1 = background1;
+        this.background2 = background2;
     }
 
     public char[][] imageToString() throws CustomException {
@@ -45,9 +43,9 @@ public class BmpPrint {
             for (int xPixel = 0; xPixel < this.image.getWidth(); xPixel++) {
                 int color = this.image.getRGB(xPixel, yPixel);
                 if (color == Color.BLACK.getRGB()) {
-                    image[yPixel][xPixel] = black;
+                    image[yPixel][xPixel] = 'B'; // Use a block for black pixels
                 } else if (color == Color.WHITE.getRGB()) {
-                    image[yPixel][xPixel] = white;
+                    image[yPixel][xPixel] = 'W'; // Use space for white pixels
                 } else {
                     throw new CustomException("The image must contain only black and white pixels");
                 }
@@ -57,11 +55,25 @@ public class BmpPrint {
     }
 
     public void displayImage(char[][] arr) {
+        ColoredPrinter printer = new ColoredPrinter.Builder(1, false)
+                .build();
+
+        // Define the Unicode characters for black and white squares
+
+        // Print the image with the background color only (foreground set to black)
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                System.out.print("\u001B[32m" + arr[i][j] + "\u001B[0m");
+                if (arr[i][j] == 'B') { // Black pixel
+                    // Use background1 for black pixels and foreground set to black
+                    printer.print(" ", Ansi.Attribute.NONE, Ansi.FColor.BLACK, this.background1);
+                } else { // White pixel
+                    // Use background2 for white pixels and foreground set to black
+                    printer.print(" ", Ansi.Attribute.NONE, Ansi.FColor.BLACK, this.background2);
+                }
             }
-            System.out.println();
+            printer.clear();
+            System.out.println(); // Newline after each row
         }
     }
+
 }

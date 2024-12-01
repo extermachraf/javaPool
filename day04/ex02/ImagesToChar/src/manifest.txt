@@ -1,2 +1,2 @@
 Main-Class: ex02.ImagesToChar.src.java.Program
-Class-Path: lib/jcommander-1.81.jar lib/JColor-5.5.1.jar
+Class-Path: lib/jcommander-1.81.jar lib/JCDP-2.0.1.jar

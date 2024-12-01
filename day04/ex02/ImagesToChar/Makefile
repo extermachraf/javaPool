@@ -6,7 +6,7 @@ RESOURCE_DIR = src/resources
 JAR_NAME = ImagesToChar.jar
 MAIN_CLASS = ex02.ImagesToChar.src.java.Program
 MANIFEST = src/manifest.txt
-JARS = $(LIB_DIR)/jcommander-1.81.jar:$(LIB_DIR)/JColor-5.5.1.jar
+JARS = $(LIB_DIR)/jcommander-1.81.jar:$(LIB_DIR)/JCDP-2.0.1.jar
 
 # Compile the Java files
 compile:
@@ -30,7 +30,7 @@ clean:
 # Run the program with arguments
 run: jar
 	echo "Running the program..."
-	@java -jar $(JAR_NAME) --white . --black o
+	@java -jar $(JAR_NAME) $(ARGS)
 
 # Default target when `make` is run without arguments
 all: clean jar
