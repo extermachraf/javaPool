@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: achraf
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: chat
+    ports:
+      - "5432:5432" # Expose the PostgreSQL port to the host
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./src/main/resources:/docker-entrypoint-initdb.d/
+    networks:
+      - chat-network
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  chat-network:
+    driver: bridge
