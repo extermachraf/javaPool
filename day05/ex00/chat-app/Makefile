@@ -1,12 +1,12 @@
-main = fr._42.chat.Program
+main = target/chat-app-1.0-SNAPSHOT.jar
 
 .PHONY: build run re clean
 
 build: 
 	mvn install
 
-run: build
-	mvn exec:java -Dexec.mainClass=$(main)
+run:
+	java -jar $(main)
 
 re: clean build
 

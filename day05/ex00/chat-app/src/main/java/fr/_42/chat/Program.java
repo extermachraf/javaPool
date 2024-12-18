@@ -1,8 +1,9 @@
 package fr._42.chat;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
-import fr._42.chat.classes.*;
+import fr._42.chat.classes.User;
 
 public class Program {
     public static void main(String[] args) {
@@ -11,6 +12,7 @@ public class Program {
 
         System.out.println(achraf.hashCode());
         System.out.println(bob.hashCode());
+        System.out.println(achraf);
 
         System.err.println("equaliti = " + Objects.equals(achraf, bob));
     }

@@ -2,7 +2,7 @@ day02/ex00/files/
 day02/ex02/f
 day05/ex00/chat-app/target/
 day05/ex01/chat/target/
-day05/ex01/chat/.env
+**/*.env
 .vscode/
 day04/ex02/ImagesToChar/target/
 it.bmp
