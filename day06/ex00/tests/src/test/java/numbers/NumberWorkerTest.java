@@ -1,16 +1,14 @@
-/**
- * Unit tests for the NumberWorker class, specifically testing the isPrime method
- * with various valid and invalid inputs using parameterized tests.
- */
 package numbers;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import numbers.classes.NumberWorker;
 import numbers.exeptions.IllegalNumberException;
-import static org.junit.Assert.assertFalse;
 
 class NumberWorkerTest {
 
@@ -45,4 +43,9 @@ class NumberWorkerTest {
         }
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/resources/validSumOfDigit.csv", numLinesToSkip = 1)
+    void digitsSum_ShouldGenerateTheExpectedOutput(int input, int expectedOutput) {
+        assertEquals(expectedOutput, NumberWorker.digitsSum(input));
+    }
 }
