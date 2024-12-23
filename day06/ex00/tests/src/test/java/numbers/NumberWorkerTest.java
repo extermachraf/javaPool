@@ -44,7 +44,7 @@ class NumberWorkerTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/resources/validSumOfDigit.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/validSumOfDigit.csv", numLinesToSkip = 1)
     void digitsSum_ShouldGenerateTheExpectedOutput(int input, int expectedOutput) {
         assertEquals(expectedOutput, NumberWorker.digitsSum(input));
     }

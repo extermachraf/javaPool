@@ -1,20 +1,12 @@
 package numbers;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;  // This import is for Assert methods
 
-import org.junit.Test;
+public class AppTest {
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void testSomething() {
+        Assertions.assertEquals(2, 1 + 1);
     }
 }
