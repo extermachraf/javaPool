@@ -1,0 +1,6 @@
+numbers/classes/NumberWorker.class
+numbers/exeptions/IllegalNumberException.class
+numbers/repositories/ProductsRepositoryJdbcImpl.class
+numbers/App.class
+numbers/models/Product.class
+numbers/repositories/ProductsRepository.class

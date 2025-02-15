@@ -1,0 +1,4 @@
+numbers/AppTest.class
+numbers/NumberWorkerTest.class
+numbers/EmbeddedDataSourceTest.class
+numbers/ProductsRepositoryJdbcImplTest.class
