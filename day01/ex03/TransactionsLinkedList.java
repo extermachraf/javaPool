@@ -2,13 +2,14 @@ package day01.ex03;
 
 import java.util.UUID;
 
-public class TransactionsLinkedList {
+public class TransactionsLinkedList implements TransactionList {
     private Transaction head;
 
     public TransactionsLinkedList() {
         this.head = null;
     }
 
+    @Override
     public void addTransaction(Transaction transaction) {
         if (this.head == null) {
             this.head = transaction; // First transaction in the list
@@ -18,7 +19,9 @@ public class TransactionsLinkedList {
         }
     }
 
-    public void removeTrandactionById(UUID id) throws TransactionNotFoundException {
+
+    @Override
+    public void removeTransactionById(UUID id) throws TransactionNotFoundException {
         if (head == null) {
             throw new TransactionNotFoundException("Transaction with ID " + id + " not found.");
         }
@@ -38,10 +41,12 @@ public class TransactionsLinkedList {
             throw new TransactionNotFoundException("Transaction with ID " + id + " not found.");
         }
 
+        assert previouse != null;
         previouse.setNextTransaction(current.getnexTransaction());
 
     }
 
+    @Override
     public Transaction[] toArray() {
         int size = 0;
         Transaction current = head;

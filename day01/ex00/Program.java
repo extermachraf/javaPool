@@ -9,7 +9,7 @@ public class Program {
 
         System.out.println("-------------------------------------------");
 
-        Transaction credit = new Transaction(achraf, abdo, "debit", 1100.0);
+        Transaction credit = new Transaction(achraf, abdo, "debit", 1000.0);
         // Transaction debit = new Transaction(achraf, abdo, "debit", 600);
         credit.display();
         // debit.display();

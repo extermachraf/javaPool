@@ -10,8 +10,7 @@ public class UsersArrayList implements UsersList {
     private void addStorage() {
         int newStorage = this.users.length + this.users.length / 2;
         User[] tmp = new User[newStorage];
-        for (int i = 0; i < this.users.length; i++)
-            tmp[i] = this.users[i];
+        System.arraycopy(this.users, 0, tmp, 0, this.users.length);
         this.users = tmp;
     }
 
@@ -57,4 +56,7 @@ public class UsersArrayList implements UsersList {
         return this.users[index];
     }
 
+    public int getCapacity() {
+        return this.users.length;
+    }
 }

@@ -17,7 +17,7 @@ public class Program {
         user.displayTransactions();
 
         // Remove a transaction by ID
-        UUID transactionIdToRemove = user.getTransactions()[1].getId(); // Get the ID of the second transaction
+        UUID transactionIdToRemove = user.getTransactions()[1].getId();
         user.removeTransaction(transactionIdToRemove);
 
         // Display transactions after removal

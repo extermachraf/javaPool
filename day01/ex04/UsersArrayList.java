@@ -25,7 +25,7 @@ public class UsersArrayList implements UsersList {
             }
         }
         this.addStorage();
-        this.addUser(user); // Retry adding after resizing
+        this.addUser(user);
     }
 
     @Override

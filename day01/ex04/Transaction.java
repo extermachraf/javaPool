@@ -47,7 +47,8 @@ public class Transaction {
     }
 
     public String displayTransaction() {
-        return "Transaction ID: " + id + ", Sender: " + sender.getName() + ", Recipient: "
-                + recipient.getName() + ", Amount: " + amount + ", Type: " + type;
+        return "To " + recipient.getName() + "(id = " + recipient.getId() + ") "
+                + (type == TransactionType.DEBIT ? "-" : "+") + amount
+                + " with id = " + id;
     }
 }

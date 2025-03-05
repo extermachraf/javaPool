@@ -32,7 +32,7 @@ public class User {
     }
 
     public void removeTransaction(UUID id) throws TransactionNotFoundException {
-        transactions.removeTrandactionById(id);
+        transactions.removeTransactionById(id);
     }
 
     public Transaction[] getTransactions() {
