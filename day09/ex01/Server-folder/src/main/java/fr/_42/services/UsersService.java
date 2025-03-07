@@ -1,7 +1,7 @@
 package fr._42.services;
 
 import fr._42.models.User;
-import fr._42.repositpries.UserRepoExeption;
+import fr._42.repositpries.user.UserRepoExeption;
 
 import java.util.Optional;
 

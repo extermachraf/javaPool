@@ -14,6 +14,7 @@ public class Message {
     Long id;
     User sender;
     String text;
+    Chatroom chatroom;
     LocalDateTime timestamp;
 
     public Message(User sender, String text, LocalDateTime timestamp) {

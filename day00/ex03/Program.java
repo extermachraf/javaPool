@@ -81,12 +81,11 @@ public class Program {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int order = 0; // using order to keep tracking the order of weeks
+        int order = 0;
         while (true) {
             System.out.print("-->");
             String week = scanner.nextLine();
             if (week.equals("42")) {
-                // deleat the last \n and print the graph of statistics
                 if (progressData.length() > 0 && progressData.charAt(progressData.length() - 1) == '\n')
                     progressData.deleteCharAt(progressData.length() - 1);
                 System.out.println(progressData);

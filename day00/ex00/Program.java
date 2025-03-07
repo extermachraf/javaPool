@@ -12,7 +12,7 @@ package day00.ex00;
 
 public class Program {
     public static void main(String[] args) {
-        int number = 45678;
+        int number = 42;
         int sum = 0;
         while (number > 0) {
             int digit = number % 10;

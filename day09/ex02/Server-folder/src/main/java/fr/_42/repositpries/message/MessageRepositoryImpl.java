@@ -1,11 +1,13 @@
 package fr._42.repositpries.message;
 
+import fr._42.models.Chatroom;
 import fr._42.models.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Component
 public class MessageRepositoryImpl implements MessageRepository {
@@ -29,6 +31,11 @@ public class MessageRepositoryImpl implements MessageRepository {
             throw new MessageRepoExeption("error while saving message" + e.getMessage());
         }
 
+    }
+
+    @Override
+    public List<Message> findRoomMessages(Chatroom chatroom){
+        return null;
     }
 
 }

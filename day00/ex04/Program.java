@@ -23,14 +23,14 @@ public class Program {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        // Count the frequency of each character in the input
+        // 1 Count the frequency of each character in the input
         int[] frequency = new int[65536];
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             frequency[c]++;
         }
 
-        // Store characters that appear in the input
+        // 2 Store characters that appear in the input
         int[] sortedChars = new int[65536];
         int uniqueCharCount = 0;
 
@@ -39,7 +39,7 @@ public class Program {
                 sortedChars[uniqueCharCount++] = i;
         }
 
-        // Sort the characters by frequency and lexicographically using bubble sort
+        // 3 Sort the characters by frequency and lexicographically using bubble sort
         for (int i = 0; i < uniqueCharCount - 1; i++) {
             for (int j = i + 1; j < uniqueCharCount; j++) {
                 int currentChar = sortedChars[i];
@@ -53,23 +53,23 @@ public class Program {
             }
         }
 
-        // Find the maximum frequency
+        // 4 Find the maximum frequency
         int maxFrequency = frequency[sortedChars[0]];
 
-        // Scale the frequencies to fit within a height of 10
+        // 5 Scale the frequencies to fit within a height of 10
         int[] scaledHeights = new int[Math.min(uniqueCharCount, 10)];
         for (int i = 0; i < Math.min(uniqueCharCount, 10); i++) {
             int count = frequency[sortedChars[i]];
             scaledHeights[i] = (int) Math.ceil((double) count / maxFrequency * 10);
         }
 
-        // Print the frequency numbers above the histogram bars
+        // 6 Print the frequency numbers above the histogram bars
         for (int i = 0; i < Math.min(uniqueCharCount, 10); i++) {
             System.out.print(frequency[sortedChars[i]] + "  ");
         }
         System.out.println();
 
-        // Print the histogram vertically, scaling to fit within 10 rows
+        // 7 Print the histogram vertically, scaling to fit within 10 rows
         for (int row = 10; row > 0; row--) {
             for (int i = 0; i < Math.min(uniqueCharCount, 10); i++) {
                 int scaledHeight = scaledHeights[i];
@@ -85,7 +85,7 @@ public class Program {
             System.out.println(); // New line after each row
         }
 
-        // Print the characters at the bottom
+        // 8 Print the characters at the bottom
         for (int i = 0; i < Math.min(uniqueCharCount, 10); i++) {
             System.out.print((char) sortedChars[i] + "  ");
         }
@@ -93,3 +93,5 @@ public class Program {
         scanner.close();
     }
 }
+
+

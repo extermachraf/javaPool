@@ -1,92 +1,129 @@
+package fr._42;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Client {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 12345;
+    private static final AtomicBoolean running = new AtomicBoolean(true);
 
     public static void main(String[] args) {
         try (
-                // Establish connection to server
                 Socket clientSocket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-                // Writer to send data to server
                 PrintWriter serverOutput = new PrintWriter(clientSocket.getOutputStream(), true);
-                // Reader to receive data from server
                 BufferedReader serverInput = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                // Reader to get user input from console
-                BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+                BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))
         ) {
-            String serverResponse;
-            // Listen for server messages
-            while ((serverResponse = serverInput.readLine()) != null) {
-                System.out.println("Server: " + serverResponse);
+            // Read initial server greeting
+            String welcomeMessage = serverInput.readLine();
+            System.out.println("Server: " + welcomeMessage);
 
-                // Start command handling after initial server greeting
-                if (serverResponse.equals("Hello from Server!")) {
-                    processUserCommands(serverOutput, serverInput, userInput);
-                    break; // Exit after command processing
-                }
+            // Handle authentication first
+            boolean authenticated = handleAuthentication(serverOutput, serverInput, userInput);
+
+            if (authenticated) {
+                // Start a separate thread to listen for messages from the server
+                Thread messageListener = createMessageListenerThread(serverInput);
+                messageListener.start();
+
+                // Handle messaging in the main thread
+                handleChatSession(serverOutput, userInput);
+
+                // Wait for the listener thread to finish when exiting
+                running.set(false);
+                messageListener.join();
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
+            System.err.println("Client error: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Handles user command input and server communication
+     * Handles the authentication process (sign in or sign up)
      */
-    private static void processUserCommands(PrintWriter serverOutput, BufferedReader serverInput, BufferedReader userInput)
+    private static boolean handleAuthentication(PrintWriter serverOutput, BufferedReader serverInput, BufferedReader userInput)
             throws IOException {
         while (true) {
-            System.out.print("Enter command (signUp, signIn, exit): ");
-            String userCommand = userInput.readLine().trim();
-            serverOutput.println(userCommand);  // Send command to server
+            // Receive command prompt from server
+            String authPrompt = serverInput.readLine();
+            System.out.println("Server: " + authPrompt);
 
-            if ("exit".equalsIgnoreCase(userCommand)) {
-                handleExitProtocol(serverOutput, serverInput);
-                break;
-            } else if ("signUp".equalsIgnoreCase(userCommand) || "signIn".equalsIgnoreCase(userCommand)) {
-                handleAuthenticationFlow(serverOutput, serverInput, userInput, userCommand);
+            // Get user input for authentication command
+            System.out.print("Enter command: ");
+            String authCommand = userInput.readLine().trim();
+            serverOutput.println(authCommand);
+
+            if ("signUp".equalsIgnoreCase(authCommand) || "signIn".equalsIgnoreCase(authCommand)) {
+                // Username prompt
+                String usernamePrompt = serverInput.readLine();
+                System.out.println("Server: " + usernamePrompt);
+                System.out.print("Username: ");
+                String username = userInput.readLine();
+                serverOutput.println(username);
+
+                // Password prompt
+                String passwordPrompt = serverInput.readLine();
+                System.out.println("Server: " + passwordPrompt);
+                System.out.print("Password: ");
+                String password = userInput.readLine();
+                serverOutput.println(password);
+
+                // Get authentication result
+                String result = serverInput.readLine();
+                System.out.println("Server: " + result);
+
+                // Check if authentication was successful (server should send a message indicating start of chat)
+                if (result.contains("Start messaging")) {
+                    return true;
+                }
+                // If authentication failed, the server will send the command prompt again
             } else {
-                // Handle simple commands
+                // Invalid command
                 String response = serverInput.readLine();
                 System.out.println("Server: " + response);
-                if(response.equals("Successful!") || response.equals("Failed!")){
-                    break;
-                }
             }
         }
     }
 
     /**
-     * Handles authentication process (both signup and signin)
+     * Creates a thread that listens for incoming messages from the server
      */
-    private static void handleAuthenticationFlow(PrintWriter serverOutput, BufferedReader serverInput,
-                                                 BufferedReader userInput, String authType) throws IOException {
-        // Get username
-        System.out.println(serverInput.readLine());  // Show server prompt
-        String username = userInput.readLine();
-        serverOutput.println(username);
-
-        // Get password
-        System.out.println(serverInput.readLine());  // Show server prompt
-        String password = userInput.readLine();
-        serverOutput.println(password);
-
-        // Get final result
-        String authResult = serverInput.readLine();
-        System.out.println("Authentication Result: " + authResult);
+    private static Thread createMessageListenerThread(BufferedReader serverInput) {
+        return new Thread(() -> {
+            try {
+                String message;
+                while (running.get() && (message = serverInput.readLine()) != null) {
+                    System.out.println(message);
+                }
+            } catch (IOException e) {
+                if (running.get()) {
+                    System.err.println("Connection to server lost: " + e.getMessage());
+                }
+            }
+        });
     }
 
     /**
-     * Handles graceful exit procedure
+     * Handles the chat session after successful authentication
      */
-    private static void handleExitProtocol(PrintWriter serverOutput, BufferedReader serverInput) throws IOException {
-        serverOutput.println("exit");  // Confirm exit command
-        String exitMessage = serverInput.readLine();
-        System.out.println("Server: " + exitMessage);
+    private static void handleChatSession(PrintWriter serverOutput, BufferedReader userInput) throws IOException {
+        String userMessage;
+        System.out.println("Chat session started. Type 'exit' to quit.");
+
+        while (true) {
+            userMessage = userInput.readLine();
+            if (userMessage == null || "exit".equalsIgnoreCase(userMessage.trim())) {
+                serverOutput.println("exit");
+                System.out.println("Exiting chat...");
+                break;
+            }
+            serverOutput.println(userMessage);
+        }
     }
 }

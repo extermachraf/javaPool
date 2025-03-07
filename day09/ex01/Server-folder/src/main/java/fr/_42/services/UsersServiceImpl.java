@@ -1,8 +1,8 @@
 package fr._42.services;
 
 import fr._42.models.User;
-import fr._42.repositpries.UserRepoExeption;
-import fr._42.repositpries.UsersRepositoryImpl;
+import fr._42.repositpries.user.UserRepoExeption;
+import fr._42.repositpries.user.UsersRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +28,7 @@ public class UsersServiceImpl implements UsersService {
             String hashedPassword = passwordEncoder.encode(password);
             User user = new User(username, hashedPassword);
             usersRepository.save(user);
-            System.out.println("User signed up: {}"+ username);
+            System.out.println("User signed up: "+ username);
         } catch (Exception e) {
             throw new UserRepoExeption(e.getMessage());
         }
