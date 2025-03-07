@@ -38,7 +38,7 @@ public class Shell {
                 System.out.println("Unknown command: " + cmd);
                 break;
         }
-        System.out.println("\u001B[33m" + currentDirectory.getPath() + "\u001B[0m");
+        System.out.println("\u001B[33m" + currentDirectory.getCanonicalPath() + "\u001B[0m");
     }
 
     // implement the ls cmd
@@ -57,7 +57,7 @@ public class Shell {
         }
     }
 
-    // implemetation od cd
+    // implemetation of cd
     private void navigateDir(String[] splitline) throws IOException {
         if (splitline.length != 2) {
             System.err.println("Unknown argument for cd");
