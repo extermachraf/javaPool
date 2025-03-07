@@ -30,7 +30,7 @@ public class Program {
     public static void main(String args[]) {
         try {
             String pathToWorkDir = parse_args(args);
-            System.err.println(pathToWorkDir);
+            System.out.println(pathToWorkDir);
             isValideDirectoryPath(pathToWorkDir);
 
             Shell shell = new Shell(pathToWorkDir);
