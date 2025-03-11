@@ -50,9 +50,7 @@ public class Program {
 
             bmp.displayImage(bmp.imageToString());
 
-        } catch (CustomException ex) {
-            System.err.println("\u001B[31mERROR: " + ex.getMessage() + "\u001B[0m");
-        } catch (IOException ex) {
+        } catch (CustomException | IOException ex) {
             System.err.println("\u001B[31mERROR: " + ex.getMessage() + "\u001B[0m");
         }
     }

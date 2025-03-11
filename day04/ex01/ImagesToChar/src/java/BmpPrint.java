@@ -57,9 +57,9 @@ public class BmpPrint {
     }
 
     public void displayImage(char[][] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                System.out.print("\u001B[32m" + arr[i][j] + "\u001B[0m");
+        for (char[] chars : arr) {
+            for (char aChar : chars) {
+                System.out.print("\u001B[32m" + aChar + "\u001B[0m");
             }
             System.out.println();
         }

@@ -26,7 +26,6 @@ jar: compile copy-resources
 clean:
 	rm -rf $(TARGET_DIR)
 	rm -f $(JAR_NAME)
-
 # Run the program with arguments
 run: jar
 	echo "Running the program..."

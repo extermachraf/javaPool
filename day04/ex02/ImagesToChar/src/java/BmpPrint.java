@@ -58,8 +58,6 @@ public class BmpPrint {
         ColoredPrinter printer = new ColoredPrinter.Builder(1, false)
                 .build();
 
-        // Define the Unicode characters for black and white squares
-
         // Print the image with the background color only (foreground set to black)
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
