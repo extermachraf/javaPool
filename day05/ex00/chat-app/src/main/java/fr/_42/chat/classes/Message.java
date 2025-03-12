@@ -10,8 +10,15 @@ public class Message {
     private String text;
     private LocalDateTime createdAt;
 
-    public Message(int id, User author, Chatroom room, String text, LocalDateTime createdAt) {
+    private Message(int id, User author, Chatroom room, String text, LocalDateTime createdAt) {
         this.id = id;
+        this.author = author;
+        this.room = room;
+        this.text = text;
+        this.createdAt = createdAt;
+    }
+
+    public Message(User author, Chatroom room, String text, LocalDateTime createdAt) {
         this.author = author;
         this.room = room;
         this.text = text;

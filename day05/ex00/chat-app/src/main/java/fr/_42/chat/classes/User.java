@@ -10,8 +10,15 @@ public class User {
     private List<Chatroom> createdRooms;
     private List<Chatroom> socializingRooms;
 
-    public User(int id, String login, String password, List<Chatroom> createdRooms, List<Chatroom> socializingRooms) {
+    private User(int id, String login, String password, List<Chatroom> createdRooms, List<Chatroom> socializingRooms) {
         this.userId = id;
+        this.login = login;
+        this.password = password;
+        this.createdRooms = createdRooms;
+        this.socializingRooms = socializingRooms;
+    }
+
+    public User(String login, String password, List<Chatroom> createdRooms, List<Chatroom> socializingRooms) {
         this.login = login;
         this.password = password;
         this.createdRooms = createdRooms;

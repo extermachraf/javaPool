@@ -30,14 +30,14 @@ public class Program {
     
                
                 
-            // connecting to data base
+            // connecting to database
             DatabaseConfig databaseconfig = new DatabaseConfig();
             DataSource datasource = databaseconfig.gDataSource();    
             MessagesRepository repository = new MessagesRepositoryJdbcImpl(datasource);
             ///////////
             
 
-            // get the message by id and diusplay it
+            // get the message by id and display it
             Optional<Message> message = repository.findById(Long.parseLong(input));
             // Display the result
             message.ifPresentOrElse(

@@ -7,13 +7,14 @@ import fr._42.chat.classes.User;
 
 public class Program {
     public static void main(String[] args) {
-        User achraf = new User(0, "achraf", "123", new ArrayList<>(), new ArrayList<>());
-        User bob = new User(0, "achraf", "123", new ArrayList<>(), new ArrayList<>());
+        User achraf = new User( "achraf", "123", new ArrayList<>(), new ArrayList<>());
+        User bob = new User( "achraf", "123", new ArrayList<>(), new ArrayList<>());
 
+        User jack = new User( "jack", "123", new ArrayList<>(), new ArrayList<>());
         System.out.println(achraf.hashCode());
-        System.out.println(bob.hashCode());
+        System.out.println(jack.hashCode());
         System.out.println(achraf);
 
-        System.err.println("equaliti = " + Objects.equals(achraf, bob));
+        System.out.println("equaliti = " + Objects.equals(achraf, jack));
     }
 }

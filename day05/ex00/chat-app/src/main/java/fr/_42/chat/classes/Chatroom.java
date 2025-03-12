@@ -10,8 +10,14 @@ public class Chatroom {
     private List<Message> messages;
 
     // constructor
-    public Chatroom(int id, String name, User owner, List<Message> messages) {
+    private Chatroom(int id, String name, User owner, List<Message> messages) {
         this.id = id;
+        this.name = name;
+        this.owner = owner;
+        this.messages = messages;
+    }
+
+    public Chatroom(String name, User owner, List<Message> messages) {
         this.name = name;
         this.owner = owner;
         this.messages = messages;

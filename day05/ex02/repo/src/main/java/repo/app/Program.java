@@ -3,6 +3,7 @@ package repo.app;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
@@ -26,12 +27,18 @@ public class Program {
             DataSource datasource = databaseconfig.gDataSource();    
             MessagesRepository repository = new MessagesRepositoryJdbcImpl(datasource);
             ///////////
-            
+//
             User creator = new User(2L, "user", "user", new ArrayList<>(), new ArrayList<>());
             User author = creator;
             Chatroom room = new Chatroom(2L, "room", creator, new ArrayList<>());
-            Message message = new Message(null, author, room, "Hello!", LocalDateTime.now());
+            Message message = new Message( author, room, "Hello!", LocalDateTime.now());
             repository.save(message);
+//            Optional<Message> message =  repository.findById(32L);
+//            if(message.isPresent()){
+//                System.out.println(message.get());
+//            }else {
+//                System.out.println("Message not found");
+//            }
         } catch (IllegalArgumentException e){
             System.err.println(e.getMessage());
         } catch (NotSavedSubEntityException e){

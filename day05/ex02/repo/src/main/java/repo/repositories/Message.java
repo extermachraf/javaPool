@@ -18,6 +18,12 @@ public class Message {
         this.text = text;
         this.createdAt = createdAt;
     }
+    public Message( User author, Chatroom room, String text, LocalDateTime createdAt) {
+        this.author = author;
+        this.room = room;
+        this.text = text;
+        this.createdAt = createdAt;
+    }
 
     // geters
     public Long getId() {

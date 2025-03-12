@@ -40,8 +40,9 @@ public class Program {
             message.ifPresentOrElse(
                     System.out::println,
                     () -> System.out.println("Message not found"));
+
         } catch(IOException e){
-            System.err.println("ERRORE");
+            System.err.println("ERROR");
         } catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
