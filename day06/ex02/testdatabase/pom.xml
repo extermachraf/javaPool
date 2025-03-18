@@ -12,9 +12,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>  <!-- Use Java 17 -->
-    <maven.compiler.target>17</maven.compiler.target>  <!-- Use Java 17 -->
-    <maven.compiler.release>17</maven.compiler.release> <!-- Optional: Set Java 17 as release version -->
+    <maven.compiler.source>22</maven.compiler.source>  <!-- Use Java 17 -->
+    <maven.compiler.target>22</maven.compiler.target>  <!-- Use Java 17 -->
+    <maven.compiler.release>22</maven.compiler.release> <!-- Optional: Set Java 17 as release version -->
   </properties>
 
   <dependencies>
