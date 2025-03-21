@@ -15,7 +15,7 @@ public class Main {
             service.invokeService();
         } catch (IOException | ReflectExceptions | IllegalAccessException | NoSuchFieldException |
                  InvocationTargetException e) {
-            System.err.println(e.getMessage());
+            System.err.println("an errore oxxured");
         }
     }
 }
