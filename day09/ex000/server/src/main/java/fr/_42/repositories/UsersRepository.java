@@ -2,6 +2,9 @@ package fr._42.repositories;
 
 import fr._42.models.User;
 
+import java.util.Optional;
+
 public interface UsersRepository {
-    public User createUser(User user);
+    User createUser(User user);
+    Optional<User> findUserByUsername(String username);
 }
