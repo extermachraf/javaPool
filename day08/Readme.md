@@ -57,15 +57,12 @@ This module introduces the **Spring Framework**, focusing on dependency injectio
 
 ### Exercise 03: Service Layer Design 🏗️
 
-- **Objective:** Build a service layer to encapsulate business logic.
+- **Objective:**
+  - Build a service layer to encapsulate business logic.
+    -- Write unit tests for Spring services.
 - **Key Skills:**
   - Designing service interfaces and implementations.
   - Managing transactions with Spring.
-
-### Exercise 04: Unit Testing 🧪
-
-- **Objective:** Write unit tests for Spring services.
-- **Key Skills:**
   - Using JUnit and Spring Test.
   - Mocking dependencies.
 
