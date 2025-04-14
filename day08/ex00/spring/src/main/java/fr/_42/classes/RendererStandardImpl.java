@@ -11,7 +11,7 @@ public class RendererStandardImpl implements Renderer {
     }
     @Override
     public void render(String message){
-        preProcessor.preProcess(message);
-        System.out.println(message);
+        String prepr = preProcessor.preProcess(message);
+        System.out.println(prepr);
     }
 }

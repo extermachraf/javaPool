@@ -24,7 +24,7 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
             logger.warn("Email is null or empty");
             return Optional.empty();
         }
-        String sql = "select * from \"user\" where email = :email";
+        String sql = "select * from users where email = :email";
         MapSqlParameterSource params = new MapSqlParameterSource("email", email);
         try {
 
@@ -48,7 +48,7 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
             logger.warn("id is null");
             return null;
         }
-        String sql = "select * from \"user\" where id = :id";
+        String sql = "select * from users where id = :id";
         MapSqlParameterSource params = new MapSqlParameterSource("id", id);
 
         try {
@@ -94,12 +94,12 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
             throw new NullPointerException ("email is null or empty");
         }
 
-//        check if the user exist befor update
-        if(Optional.ofNullable(this.findByEmail(entity.getEmail())).isPresent()){
-            logger.error("user already exist with email: {}", entity.getEmail());
-            throw new BadAttributeValueExpException("user already exist with email");
-        }
-        String sql = "INSERT INTO \"user\" (\"full_name\", \"email\") VALUES (:fullName, :email)";
+//        Optional<User> existingUser = this.findByEmail(entity.getEmail());
+//        if (existingUser.isPresent()) {
+//            logger.error("user already exist with email: {}", entity.getEmail());
+//            throw new BadAttributeValueExpException("user already exist with email");
+//        }
+        String sql = "INSERT INTO users (\"full_name\", \"email\") VALUES (:fullName, :email)";
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("fullName", entity.getFullName())
                 .addValue("email", entity.getEmail());
@@ -138,7 +138,7 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
             throw new BadAttributeValueExpException("user does not exist with id: " + entity.getId());
         }
 
-        String sql = "UPDATE \"user\" SET full_name = :fullName, email = :email WHERE id = :id";
+        String sql = "UPDATE users SET full_name = :fullName, email = :email WHERE id = :id";
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("id", entity.getId())
                 .addValue("fullName", entity.getFullName())
@@ -162,7 +162,7 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository {
             throw new NullPointerException("User ID is null");
         }
 
-        String sql = "DELETE FROM \"user\" WHERE id = :id";
+        String sql = "DELETE FROM users WHERE id = :id";
         MapSqlParameterSource params = new MapSqlParameterSource("id", id);
 
         try {

@@ -23,7 +23,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     public Optional<User> findByEmail(String email) throws SQLException, BadAttributeValueExpException{
         if(email == null || email.isEmpty())
             throw new BadAttributeValueExpException("null eamil is not allowed");
-        String query = String.format("select * from \"user\" where email = '%s'", email);
+        String query = String.format("select * from users where email = '%s'", email);
         try(Connection con = ds.getConnection();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(query)) {
@@ -37,7 +37,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
 
     @Override
     public User findById(Long id) throws SQLException{
-        String query = String.format("select * from \"user\" where id = '%d'", id);
+        String query = String.format("select * from users where id = '%d'", id);
         try(Connection conn = ds.getConnection();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query)){
@@ -52,7 +52,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     @Override
     public List<User> findAll() throws SQLException{
         List<User> users = new ArrayList<>();
-        String query = "select * from \"user\"";
+        String query = "select * from users";
         try(Connection conn = ds.getConnection();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query)){
@@ -71,7 +71,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
             throw new BadAttributeValueExpException("You cannot insert a null user.");
         }
 
-        String sql = String.format("INSERT INTO \"user\" (email, full_name) VALUES ('%s', '%s')",
+        String sql = String.format("INSERT INTO users (email, full_name) VALUES ('%s', '%s')",
                 entity.getEmail(), entity.getFullName());
 
         try (Connection conn = this.ds.getConnection();
@@ -89,7 +89,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
             throw new BadAttributeValueExpException("You cannot update a user with a null id.");
         if(this.findById(entity.getId()) == null)
             throw new BadAttributeValueExpException("You cannot update a user with a non existing id.");
-        String query = String.format("UPDATE \"user\" SET email = '%s', full_name = '%s' WHERE id = '%d'",
+        String query = String.format("UPDATE users SET email = '%s', full_name = '%s' WHERE id = '%d'",
                 entity.getEmail(), entity.getFullName(), entity.getId());
         try (Connection conn = this.ds.getConnection();
         Statement stmt = conn.createStatement()) {
@@ -102,7 +102,7 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     public void delete(Long id) throws SQLException , BadAttributeValueExpException{
         if(this.findById(id) == null)
             throw new BadAttributeValueExpException("You cannot delete a non existing user.");
-        String query = String.format("DELETE FROM \"user\" WHERE id = '%d'", id);
+        String query = String.format("DELETE FROM users WHERE id = '%d'", id);
         try (Connection conn = this.ds.getConnection();
         Statement stmt = conn.createStatement()) {
             stmt.execute(query);

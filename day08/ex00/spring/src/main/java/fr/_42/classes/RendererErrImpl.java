@@ -11,7 +11,7 @@ public class RendererErrImpl implements Renderer {
     }
     @Override
     public void render(String message) {
-        preProcessor.preProcess(message);
-        System.err.println(message);
+        String prepr = preProcessor.preProcess(message);
+        System.err.println(prepr);
     }
 }

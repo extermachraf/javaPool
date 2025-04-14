@@ -6,6 +6,6 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         Printer printer = context.getBean("printerWithPrefix", Printer.class);
-        printer.displayMessage("Hello!");
+        printer.displayMessage("HEllo!");
     }
 }

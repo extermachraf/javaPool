@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: day08_postgres
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: day08
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5003:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

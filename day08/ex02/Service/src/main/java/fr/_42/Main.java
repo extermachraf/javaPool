@@ -15,9 +15,10 @@ public class Main {
 //        System.out.println("this is the jdbcTemplate" + jdbcTemplate);
         UsersServiceImpl usersService = (UsersServiceImpl) context.getBean("usersServiceImpl");
 //        usersService.save(new User("elon@gmail.com", "sirtn3ess#kl"));
-//        String email = "user@postgresql.org";
-//        usersService.signUp(email);
-        Optional<User> u = usersService.findByEmail("user@postgresql.org");
+        String email = "testouu@postgresql.org";
+        String password = usersService.signUp(email);
+        System.out.println("password generated is :" + password);
+        Optional<User> u = usersService.findByEmail("testouu@postgresql.org");
         u.ifPresent(user -> System.out.println(user.toString()));
     }
 }
