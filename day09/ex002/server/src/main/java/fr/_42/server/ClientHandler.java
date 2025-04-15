@@ -110,7 +110,7 @@ public class ClientHandler implements Runnable {
             }
 
         } catch (IOException e) {
-            throw new ServException("Client handler ERROR : " + e.getMessage());
+            throw new ServException("server socket closed...");
         } finally {
             try {
                 if (authenticatedUser != null) {

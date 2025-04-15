@@ -21,8 +21,9 @@ public class RoomState implements  ConnectionState{
             writer.println(SerializeDeserializeMessage.serialize(new Instruction("roomState")));
             String ClientMessage = Objects.requireNonNull(SerializeDeserializeMessage.deserialize(reader.readLine(), Instruction.class)).getMessage();
             if(ClientMessage == null){
-                ClientHandler.getAuthenticatedUsers().remove(context);
                 System.out.println("connexion exited " + context.getClientSocket().getInetAddress());
+                context.stop();
+                ClientHandler.getAuthenticatedUsers().remove(context);
                 break;
             }
             else if(ClientMessage.equals("1")){

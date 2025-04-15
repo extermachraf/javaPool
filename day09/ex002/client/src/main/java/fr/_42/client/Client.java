@@ -43,7 +43,7 @@ public class Client implements ServerHandlers.MessageListener {
                     return;
                 }
             } catch (Exception ignored) {
-                // Not a MessageSerialization, try next format
+                // Not a MessageSerialization
             }
 
             try {
@@ -69,9 +69,7 @@ public class Client implements ServerHandlers.MessageListener {
                 System.out.println("System: " + message);
             }
             // Only show prompt after non-history messages
-            if (!message.contains("Last") && !message.contains("---")) {
-                System.out.print("> ");
-            }
+            System.out.print("> ");
         } else {
             messageQueue.offer(message);
         }
@@ -110,7 +108,6 @@ public class Client implements ServerHandlers.MessageListener {
     }
 
     private void handleChatState() throws IOException, InterruptedException {
-        // Get and display welcome message
         Instruction welcomeMsg = SerializeDeserializeMessage.deserialize(messageQueue.take(), Instruction.class);
         if (welcomeMsg != null) {
             System.out.println(welcomeMsg.getMessage());
@@ -129,7 +126,7 @@ public class Client implements ServerHandlers.MessageListener {
                         System.out.println("exiting chat...");
                         break;
                     }
-                    if(!input.isEmpty()) {
+                    else if(!input.isEmpty()) {
                         serverHandlers.sendMessage(SerializeDeserializeMessage.serialize(new Instruction(input)));
                     }
                 }
@@ -164,9 +161,10 @@ public class Client implements ServerHandlers.MessageListener {
             System.out.println("2. Choose room");
             System.out.println("3. exit");
 
-            String message = this.readLine(">");
+            System.out.print("> ");
+            String message = userInput.readLine();
 
-            if (message == null || message.equals("3")) {
+            if (message.equals("3")) {
                 serverHandlers.sendMessage(SerializeDeserializeMessage.serialize(new Instruction(message)));
                 break;
             }

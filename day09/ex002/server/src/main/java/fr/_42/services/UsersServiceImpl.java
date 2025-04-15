@@ -27,16 +27,14 @@ public class UsersServiceImpl implements UsersService {
             return null;
         if(!passwordEncoder.matches(password, user.get().getPassword()))
             return null;
-        System.out.println("welcome " + user.get().getUsername());
         return user.get();
     }
 
     @Override
     public User SignUp(String username, String password) throws ServException {
         if(userRepositoryImpl.findUserByUsername(username).isPresent())
-            throw new ServException("Username is already in use");
+            return null;
         User user = userRepositoryImpl.createUser(new User(null, username, this.passwordEncoder.encode(password)));
-        System.out.println("User created successfully");
         return user;
     }
 }

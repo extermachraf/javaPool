@@ -22,7 +22,7 @@ public class Main {
         try {
             server.StartServer();
         } catch (ServException e){
-            System.out.println(e.getMessage());
+            System.out.println("");
         }
     }
 }

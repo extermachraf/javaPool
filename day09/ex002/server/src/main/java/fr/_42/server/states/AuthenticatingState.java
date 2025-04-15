@@ -17,6 +17,7 @@ public class AuthenticatingState implements ConnectionState {
         String choice = reader.readLine();
         if(choice == null){
             System.out.println("connexion exited " + context.getClientSocket().getInetAddress());
+            context.stop();
             return;
         }
         if(!(choice.equals("1") || choice.equals("2") || choice.equals("3"))) {
@@ -32,7 +33,6 @@ public class AuthenticatingState implements ConnectionState {
 
         String username = reader.readLine();
         String password = reader.readLine();
-        System.out.printf("{%s}  {%s}", username, password);
 
         User user = null;
         if (choice.equals("1")) {
@@ -42,12 +42,11 @@ public class AuthenticatingState implements ConnectionState {
         }else {
             writer.println("enter a valid number please");
             context.setState(new InitialState());
+            return;
         }
 
-        System.out.println(user);
         if (user != null) {
             for(ClientHandler client : ClientHandler.getAuthenticatedUsers()){
-                System.out.println("Checking against user: " + client.getAuthenticatedUser().getId() + " vs " + user.getId());
                 if(client.getAuthenticatedUser().equals(user)) {
                     writer.println("You are already authenticated");
                     context.setState(new InitialState());

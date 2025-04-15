@@ -41,12 +41,12 @@ public class Server {
                         serverSocket.close();
                     }
                 }catch (IOException e) {
-                    System.out.println("Server cleanup ERROR : " + e.getMessage());
+                    System.out.println("");
                 }
             }));
             this.handleClientConnection(serverSocket);
         } catch (IOException e) {
-            throw new ServException("Error starting server" + e.getMessage());
+            throw new ServException("");
         }
         catch (NullPointerException e){
             System.out.println("Server stopped");
